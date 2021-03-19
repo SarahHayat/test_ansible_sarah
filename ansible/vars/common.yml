@@ -3,7 +3,7 @@ app_name: test_sarah
 docker_compose_command: "docker-compose -f docker-compose.yml -f"
 manage_command: "{{ docker_compose_command }} run --rm web ./manage.py"
 
-project_repo_url: ssh://git@github.com:SarahHayat/test_ansible_sarah.git
+project_repo_url: ssh://git@github.com/SarahHayat/test_ansible_sarah.git
 
 docker__daemon_json: |
   "bip": "{{ email_host }}/24",
