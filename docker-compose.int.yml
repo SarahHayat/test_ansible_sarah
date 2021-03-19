@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+
+    db:
+        restart: always
+
+    redis:
+        restart: always
+
+    web:
+        restart: always
+        ports:
+            - "${DAPHNE_PORT}:${DAPHNE_PORT}"
+        command: /usr/local/bin/daphne predig.asgi:application --bind 0.0.0.0 --port ${DAPHNE_PORT}
+
+    celery:
+        restart: always
+
+    celery-beat:
+        restart: always

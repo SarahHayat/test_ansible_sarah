@@ -1,0 +1,15 @@
+app_name: test_sarah
+
+docker_compose_command: "docker-compose -f docker-compose.yml -f"
+manage_command: "{{ docker_compose_command }} run --rm web ./manage.py"
+
+project_repo_url:
+
+docker__daemon_json: |
+  "bip": "{{ email_host }}/24",
+  "default-address-pools": [
+    {
+      "base": "{{ docker_subnet }}/16",
+      "size": 24
+    }
+  ]

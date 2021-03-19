@@ -1,0 +1,12 @@
+- name: Update apt cache
+  apt: update_cache=yes
+
+- name: Install package dependencies
+  apt:
+    state: present
+    pkg:
+    - build-essential
+    - gettext
+    - git
+    - python3-pip  # Needed for ansible roles (supervisor)
+    - python3-setuptools  # Needed for ansible roles (docker)

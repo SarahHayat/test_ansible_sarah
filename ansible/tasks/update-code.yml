@@ -1,0 +1,6 @@
+- name: Update backend code
+  git: repo={{ project_repo_url }}
+    dest={{ project_root }}
+    accept_hostkey=yes
+    key_file=/home/deploy/.ssh/id_rsa
+    version={{ git_checkout_branch }}

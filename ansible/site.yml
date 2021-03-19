@@ -1,0 +1,49 @@
+---
+- hosts: all
+  become: "{{ ansible_become }}"
+  become_method: sudo
+
+  vars_files:
+    - "vars/{{ deploy_site }}.yml"
+    - vars/common.yml
+
+  pre_tasks:
+    - include: tasks/system-packages.yml
+    - include: tasks/update-code.yml
+
+  roles:
+    - role: "geerlingguy.nginx"
+    - role: "nickjj.docker"
+
+  tasks:
+    - name: Copy local_settings
+      template: src="templates/{{ app_name }}/local_settings.py.j2"
+        dest="{{ project_root }}/{{ app_name }}/local_settings.py"
+      tags: dev
+
+    - name: Copy docker-compose environment file
+      template: src="templates/docker/docker.env.j2"
+        dest="{{ project_root }}/.env"
+      tags: dev
+
+    - name: Build Docker images
+      command: "{{ docker_compose_command }} build"
+      args:
+        chdir: "{{ project_root }}"
+      tags: dev
+
+    - name: Migrate database
+      command: "{{ manage_command }} migrate"
+      args:
+        chdir: "{{ project_root }}"
+      tags: dev
+
+    - name: Collect Django static files
+      command: "{{ manage_command }} collectstatic --no-input"
+      args:
+        chdir: "{{ project_root }}"
+
+    - name: Start Sarah webapp
+      command: "{{ docker_compose_command }} up -d"
+      args:
+        chdir: "{{ project_root }}"

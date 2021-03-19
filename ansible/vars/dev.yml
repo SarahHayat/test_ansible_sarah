@@ -1,0 +1,24 @@
+---
+ansible_become: no
+project_root: "../"
+docker_compose_env: "dev"
+
+git_checkout_branch: master
+
+django_debug: True
+celery_debug: True
+
+daphne_port: 9002
+
+postgres_database: sarah
+postgres_host: db
+postgres_port: 5432
+postgres_username: sarah
+postgres_password: sarah
+
+redis_host: redis
+redis_port: 6379
+
+nginx_servername: 0.0.0.0
+nginx_protocol: http
+nginx_port: 8000

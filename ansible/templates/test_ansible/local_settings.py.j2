@@ -1,0 +1,23 @@
+import os
+import sys
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+DEBUG = {{ django_debug }}
+
+DEV = {{ django_debug }}
+
+PROTOCOL = '{{ nginx_protocol }}'
+DOMAIN = '{{ nginx_servername }}'
+PORT = {{ nginx_port }}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '{{ postgres_database }}',
+        'HOST': '{{ postgres_host }}',
+        'PORT': '{{ postgres_port }}',
+        'USER': '{{ postgres_username }}',
+        'PASSWORD': '{{ postgres_password }}',
+    }
+}

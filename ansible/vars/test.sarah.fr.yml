@@ -1,0 +1,6 @@
+---
+ansible_become: yes
+project_root: "/srv/sarah/test_ansible"
+docker_compose_env: "int"
+
+git_checkout_branch: master

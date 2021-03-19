@@ -1,0 +1,2 @@
+# Integration server
+int.noesoft.fr:6 ansible_user=shayat ansible_sudo_pass=dB59a7LtFR
